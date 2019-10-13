@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const burgers = require('../models/burger');
-// a problem might arise here with how we call burgers and the models burger file as burger.js is what I exported
+const burger = require('../models/burger');
 
 router.get('/', function (req, res) {
-    burger.selectAll(function(data) {
+    burger.all(function(data) {
         //this var might have to be changed
         var hbsObject = {
-            cats:data
+            burger:data
         };
         console.log(hbsObject);
         res.render("index", hbsObject)
@@ -15,10 +14,10 @@ router.get('/', function (req, res) {
 });
 
 router.post('/api/burgers', function (req, res) {
-    burger.insertOne(['burgerName']), [reg.body.burgerName], function(result) {
+    burgers.insertOne(['burgerName']), [reg.body.burgerName], function(result) {
         res.json({id: result.insertId})
     } 
 });
 
-
+module.exports = router;
 

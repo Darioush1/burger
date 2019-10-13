@@ -3,7 +3,7 @@
 const connection = require('./connection.js');
 
 var orm = {
-    selectAll: function(tableInput, cb){
+    all: function(tableInput, cb){
         connection.query('SELECT * FROM ' + tableInput + ';', function(err, result) {
             if(err) throw err;
             cb(result)
@@ -16,8 +16,8 @@ var orm = {
             valOfCol(result)
         })
     },
-    updateOne: function (objColVals, condition, cb){
-        connection.query('UPDATE burgers (burger_name) SET devoured = true Where burger_name' + objColVals + ';', 
+    updateOne: function (tableInput, condition, cb){
+        connection.query('UPDATE '+tableInput+' SET devoured = true Where burger_name' + condition + ';', 
         function(err, result) {
             if(err) throw err;
             valOfCol(result)
