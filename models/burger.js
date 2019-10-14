@@ -3,7 +3,7 @@ var orm = require('../config/orm');
 var burger = {
     all: function(cb) {
         orm.all('burgers', function(res){
-            cb();
+            cb(res);
         })
     },
     insertOne: function(cols, vals, cb){
@@ -11,8 +11,8 @@ var burger = {
         cb(res);
     });
     },
-    update: function(objColVals, condition, cb){
-        orm.updateOne('burgers', objColVals, condition, function(res) {
+    update: function(id, cb){
+        orm.updateOne('burger', id, cb, function(res) {
             cb(res);
         });
     }
