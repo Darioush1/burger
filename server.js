@@ -2,14 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const exphbs = require('express-handlebars');
-const mysql = require('mysql');
 const routes = require('./controllers/burgers_controllers');
-const orm = require('./config/orm.js')
+//const orm = require('./config/orm.js')
 
 var app = express();
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(express.static(__dirname + '/public'));
+
 app.use(methodOverride('_method'));
 app.engine('handlebars', exphbs({
     defaultLayout: 'main'

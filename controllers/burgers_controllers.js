@@ -4,15 +4,17 @@ const burger = require('../models/burger.js');
 
 router.get('/', function (req, res) {
     burger.all(function(data) {
-        console.log('this data yo ' + data);
-        //this var might have to be changed
-        var hbsObject = {
-            burger:data
-        };
-        console.log('hbs Object? ' + hbsObject);
-        res.render("index", hbsObject)
+        console.log('OK it ideally should work here? ' + JSON.stringify(data));
+        //var stringifyData = JSON.stringify(data);
+        // for (var i =0; i < data.length; i++) {
+		// console.log(data[i].burger_name)
+        // res.render("index", {data: data[i]})
+        // }
+        res.render('index', {data: data.burger_name})
+        // , hbsObject)
     })
 });
+
 
 router.put('/burgers/update', function (req,res) {
     console.log.log("req.body.id inside of put call"+ req.body.id)

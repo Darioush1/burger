@@ -1,14 +1,12 @@
-// object relational mapping
-//creates logic helps figure out sql code without messing up java script, letting us use javascript objects 
 const connection = require('./connection.js');
 
 var orm = {
     all: function(tableInput, cb){
-        connection.query('SELECT * FROM ' + tableInput + ';', function(err, result) {
-            if(err) throw err;
+        var sqlQuery = 'SELECT * FROM ' + tableInput + ';';
+        connection.query(sqlQuery, function(err, result) {
+            if(err) {throw err};
           
             cb(result);
-            console.log( 'cb result ? ' + cb)
             
         })
     },
