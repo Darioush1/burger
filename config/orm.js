@@ -10,18 +10,24 @@ var orm = {
             
         })
     },
-    insertOne: function (cols, vals, cb){
-        connection.query('INSERT INTO burgers (burger_name, devoured) VALUES (' + vals + ', false);', 
-        function(err, result) {
-            if(err) throw err;
-            valOfCol(result)
+    insertOne: function (table, cols, vals, cb){
+        console.log('inside insert one orm', table, cols, vals)
+        var sqlQuery = 'INSERT INTO ' + table + ' ( '+ cols +' ) VALUES  ("'+ vals +'");';
+
+        connection.query(sqlQuery, function(err, result) {
+            if(err) { throw err };
+            //valOfCol(result)
+            cb(result);
         })
+
+       
     },
     updateOne: function (tableInput, condition, cb){
-        connection.query('UPDATE '+tableInput+' SET devoured = true Where burger_name' + condition + ';', 
+        connection.query('UPDATE '+tableInput+' SET devoured = true WHERE burger_name = ' + condition + ';', 
         function(err, result) {
             if(err) throw err;
-            valOfCol(result)
+            valOfCol(result);
+            cb (result)
         })
     }
 };

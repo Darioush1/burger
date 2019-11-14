@@ -25,7 +25,9 @@ router.put('/burgers/update', function (req,res) {
 });
 
 router.post('/api/:id', function (req, res) {
-    burger.insertOne(['burgerName']), [req.body.burgerName], function(result) {
+    const { burger_name } = req.body;
+    // const { id } = req.params;
+    burger.insertOne("burger_name", burger_name), function(result) {
         res.json({id: result.insertId})
     } 
 });
